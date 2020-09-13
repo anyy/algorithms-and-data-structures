@@ -2,10 +2,11 @@ package main
 
 import "fmt"
 
-// 文字列照合アルゴリズム
+// S = baseball と
+// x = bat に対するAlgorithm2.2の動作を示しなさい。
 func main() {
-	var s, w string
-	fmt.Scan(&s, &w)
+	s := "baseball"
+	w := "bat"
 
 	var i, j int
 	for i+j < len(s) {
