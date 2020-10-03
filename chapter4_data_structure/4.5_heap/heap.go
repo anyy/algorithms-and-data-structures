@@ -46,37 +46,37 @@ func insert(x int) {
 
 // parent(i) = i / 2
 func minHeapify() {
-	idx := len(heap) - 1
+	idx := lastIndex()
 	x := heap[idx]
-	parentIdx := int(math.Floor(float64((idx - 1) / 2)))
+	parentIdx := parent(idx)
 	for idx > 0 && x < heap[parentIdx] {
 		heap[idx] = heap[parentIdx]
 		idx = parentIdx
-		parentIdx = int(math.Floor(float64((idx - 1) / 2)))
+		parentIdx = parent(idx)
 	}
 	heap[idx] = x
 }
 
 func maxHeapify() {
-	idx := len(heap) - 1
+	idx := lastIndex()
 	x := heap[idx]
-	parentIdx := int(math.Floor(float64((idx - 1) / 2)))
+	parentIdx := parent(idx)
 	for idx > 0 && x > heap[parentIdx] {
 		heap[idx] = heap[parentIdx]
 		idx = parentIdx
-		parentIdx = int(math.Floor(float64((idx - 1) / 2)))
+		parentIdx = parent(idx)
 	}
 	heap[idx] = x
 }
 
 func extractMin() (int, bool) {
-	if len(heap)-1 == 0 {
+	if lastIndex() == 0 {
 		return 0, false
 	}
 
 	min := heap[0] // root
-	heap[0] = heap[len(heap)-1]
-	heap = heap[:len(heap)-1]
+	heap[0] = heap[lastIndex()]
+	heap = heap[:lastIndex()]
 	bubbleDown(0)
 	return min, true
 
@@ -102,4 +102,12 @@ func bubbleDown(index int) {
 
 func left(k int) int {
 	return 2*k + 1
+}
+
+func parent(idx int) int {
+	return int(math.Floor(float64((idx - 1) / 2)))
+}
+
+func lastIndex() int {
+	return len(heap) - 1
 }
